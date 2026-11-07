@@ -1,0 +1,28 @@
+[package]
+name = "moonlight"
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+rust-version = "1.85"
+description = "Cross-platform n engine"
+
+[lib]
+path = "src/lib.rs"
+
+[workspace]
+resolver = "2"
+members = ["."]
+
+[workspace.package]
+edition = "2024"
+license = "MIT"
+rust-version = "1.85"
+
+[profile.release]
+codegen-units = 1
+lto = "thin"
+panic = "abort"
+strip = "symbols"
+
+[profile.dev]
+debug = "line-tables-only"

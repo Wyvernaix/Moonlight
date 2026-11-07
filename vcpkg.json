@@ -1,0 +1,7 @@
+{
+  "name": "moonlight",
+  "version-semver": "0.1.0",
+  "description": "Cross-platform Game Engine",
+  "builtin-baseline": "2024-06-05",
+  "dependencies": []
+}
