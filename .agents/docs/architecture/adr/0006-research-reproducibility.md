@@ -32,3 +32,11 @@ Storing all binaries in Git is impractical and obscures integrity.
 
 CI validates required manifest fields, hash resolution, deterministic seeds,
 schema compatibility and reference-render comparisons.
+
+## Contract checks
+
+A run is `Draft → Captured → Verified → Published` or `Rejected`; missing
+provenance, unresolved hashes, or incompatible schemas are terminal failures.
+The verified-manifest postcondition is that every input and output hash
+resolves to immutable bytes and the recorded seed/settings reproduce the
+result within its declared tolerance. See [contract verification](../contract-verification.md).

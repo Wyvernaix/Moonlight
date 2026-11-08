@@ -47,3 +47,16 @@ close/unload. Verify hash and ABI metadata before execution. See [security](secu
 Test ABI fixtures built by each supported compiler, old/new minor versions,
 wrong sizes, allocator misuse, callback reentrancy, unload races and tampered
 libraries.
+
+## Preconditions, postconditions, and compatibility
+
+Admission requires canonical identity, policy-approved path, verified
+signature/hash, supported target triple, and a table whose `struct_size` covers
+the required prefix. Successful admission guarantees that only fields within
+`struct_size` are read. Rejection guarantees no plugin hook executes and the
+library is closed. Stop guarantees handles are invalidated before unload.
+
+Compatibility is a matrix, not a best-effort comparison: ABI major must match;
+minor negotiation may select only a supported subset; pointer width,
+endianness, calling convention, and allocator ownership must match the target.
+See [ABI compatibility testing](abi-compatibility-testing.md).

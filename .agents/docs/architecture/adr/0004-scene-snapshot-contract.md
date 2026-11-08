@@ -31,3 +31,11 @@ copies were rejected because they drift and multiply memory.
 
 Test atomic publication, concurrent readers, stable IDs, failed extraction,
 schema migration and hash reproducibility.
+
+## Contract checks
+
+Extraction requires an owned authoring revision and bounded options. Success
+returns a sealed snapshot whose content hash and source revision are immutable;
+failure leaves the previous published snapshot current. Publication is the
+linearization point, and readers may run concurrently until release. A
+corrupt or incompatible snapshot is rejected without fallback semantics.

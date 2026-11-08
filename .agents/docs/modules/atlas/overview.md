@@ -141,3 +141,35 @@ is immutable after publication; late streaming assets produce a new revision.
 Validation rejects cycles, NaN transforms, non-finite bounds, and unresolved
 asset references. Spectral and Orcha can therefore replay the same geometry
 and provenance without depending on editor state.
+
+## Proof obligations and failure semantics
+
+Atlas is the authority for dimensions and identity at module boundaries.
+Validation must check that every transform translation and bound is in metres,
+angles are in radians, matrices are finite, and parent-child multiplication
+preserves the declared handedness. A scale of zero is legal only when the
+consumer explicitly supports singular transforms; otherwise extraction fails
+with `ATLAS_SINGULAR_TRANSFORM` rather than producing an inverse or normal
+matrix with undefined meaning.
+
+The hierarchy invariant is that each entity has at most one parent, no entity
+is its own ancestor, and every published world transform has exactly one path
+from its scene root. Reparent tests compare world-space preservation within
+the configured tolerance and verify that local-space reparenting changes no
+ancestor. Snapshot extraction is atomic: a failed validation publishes no
+partial snapshot. Stale handles, missing assets, cycle attempts, non-finite
+values, and revision mismatches are typed failures with the offending GUID
+and revision; consumers must not silently substitute identity transforms.
+
+CPU and GPU extraction paths consume the same canonical snapshot fixture.
+Deterministic tests sort GUIDs and component fields before hashing, pin the
+frame index and locale, and compare matrices with an absolute/relative
+tolerance plus a hash of the canonicalized payload. The test suite includes
+deep hierarchies, repeated reparenting, slot reuse/generation rollover,
+negative and nonuniform scale, empty scenes, maximum coordinate magnitudes,
+duplicate GUIDs, and adversarial cycle graphs. An extraction result records
+the snapshot hash, precision, backend, and validation status.
+
+Cross-module replay and adversarial cases follow the
+[cross-module validation protocol](../../research/cross-module-validation.md)
+and [reference scene suite](../../research/adversarial-reference-scenes.md).

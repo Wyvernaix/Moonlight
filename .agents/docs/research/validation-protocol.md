@@ -23,6 +23,33 @@ linear light with a documented color transform. Include uncertainty intervals,
 runtime, memory, hardware, and all validity diagnostics. A failed test records
 the failure; it is not hidden by changing the tolerance.
 
+## Invariants, dimensions, and parity
+
+Before comparing values, verify dimensions and normalization: lengths are
+metres, delays seconds, frequencies hertz, spectral measures are explicit, and
+zero-valued observables use an absolute scale floor. Passive optical fixtures
+check `R + T + A = 1`; acoustic fixtures check non-negative loss and bounded
+outgoing energy. Reciprocal fixtures swap source and receiver and compare the
+transfer magnitude and reversed direction. Exceptions require a declared
+non-reciprocal medium or active source.
+
+The CPU reference and GPU backend use identical canonical inputs, seeds, sample
+counts, and output definitions. Deterministic fixtures require exact canonical
+metadata and field equality. Stochastic or reduction-order-dependent paths
+compare confidence intervals and physical tolerances, while recording device,
+driver, compiler, precision, and fast-math settings. A backend that cannot
+meet the declared invariant returns a typed failure rather than a clamped or
+partial result.
+
+Each refinement must show convergence of the observable and uncertainty, not
+just a smaller residual. Propagate material, calibration, discretization,
+statistical, and round-off uncertainties; retain covariance or use a
+conservative bound when independence is not established. Exercise boundary
+and just-outside validity cases, NaN/Inf data, degenerate geometry, zero
+distance, singular transforms, missing assets, stale revisions, and simulated
+device loss. Expected failure codes and diagnostic context are part of the
+fixture's acceptance record.
+
 Each protocol names fixture provenance, expected result, command, and schema
 version. Calibrated optical data should cite the relevant
 [CIE](https://cie.co.at/) publication; color exchange metadata should follow

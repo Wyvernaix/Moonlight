@@ -35,3 +35,16 @@ Tests assert schema validity, correlation, redaction, bounded queues,
 shutdown flush, sampling determinism and behavior when the sink is unavailable.
 See [module lifecycle](module-lifecycle.md), [threading and jobs](threading-and-jobs.md)
 and [security](security.md).
+
+## Evidence requirements
+
+The minimum evidence for a lifecycle or fault test is one correlated event,
+one metric change, and (where a span exists) a terminal span status. Required
+attributes are `run_id`, `build_id`, `module_id`, operation, outcome, and
+monotonic duration; `snapshot_id` is required for snapshot operations. Missing
+correlation or unbounded attributes fail the contract test.
+
+Design target SLOs must be stated as measurable bounds (for example, queue
+depth, shutdown flush deadline, or audio underrun rate), with platform and
+workload recorded. They are not production guarantees until a release
+evidence bundle demonstrates them.

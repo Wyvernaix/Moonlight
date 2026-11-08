@@ -50,3 +50,31 @@ The minimum gate is `python/build.py --skip rust --skip managed` followed by
 `ctest --test-dir build/debug --output-on-failure`. CI additionally validates
 schemas, graph cycles, ABI fixtures, Markdown links, and reproducibility
 manifests. New architecture decisions belong in [`adr/`](adr/).
+
+## Compatibility matrix
+
+| Consumer | Stable surface | Compatibility rule | Evidence |
+| --- | --- | --- | --- |
+| Runtime module | Manifest, capability, ABI | Required range and ABI major must match | Graph + ABI fixtures |
+| Editor/Workbench | Managed API and snapshot schema | Current and migratable prior schema | Migration/golden tests |
+| Asset store | Hash, media type, byte length | Hash and decoder support required | Store and fuzz tests |
+| Platform | `Platform` service contract | Target triple and capability policy | Platform matrix |
+
+Compatibility is evaluated before execution; no fallback may silently change
+semantics. See [versioning](versioning.md) and [ABI compatibility testing](abi-compatibility-testing.md).
+
+## Threat-model boundary
+
+The host trusts its own validated code, build metadata, and policy roots. It
+does not trust plugins, manifests, assets, captures, network data, generated
+files, or telemetry sinks. Authentication, operating-system sandboxing,
+signing-key custody, and denial-of-service protection outside the process are
+system boundaries, not claims of this architecture. See [security](security.md).
+
+## Observable acceptance evidence
+
+Each startup, publication, rejection, rollback, timeout, and degraded-mode
+transition must have a correlated event and a bounded metric. A release record
+must identify the command, commit, toolchain, platform, fixture/corpus hashes,
+and result. These are design targets until enforced by CI; the verification
+method is defined in [contract verification](contract-verification.md).

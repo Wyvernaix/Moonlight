@@ -98,3 +98,38 @@ measured room impulse responses (including RT60 by band). Compare at least two
 mesh/ray resolutions and report microphone calibration and background noise.
 Unsupported low-frequency wave behavior must select a documented hybrid/wave
 solver or produce a validity diagnostic rather than an apparently precise IR.
+
+## Proof obligations and failure semantics
+
+Every path carries metres, seconds, hertz, pascals, and a declared reference
+pressure. Check the dimensional identity `delay_s = path_length_m / c_m_s`,
+that a transfer function is dimensionless relative to its calibration, and
+that air/material losses are non-negative. For a closed passive test room,
+integrated outgoing energy cannot exceed injected energy after accounting for
+the source and microphone calibration. At a reciprocal boundary, swapping
+source and listener must produce the same transfer magnitude and reversed
+arrival direction within the declared tolerance; non-reciprocal media must
+declare the exception.
+
+Convergence is reported by increasing rays/order, mesh resolution, or solver
+time step until the observable and its uncertainty meet the manifest
+tolerance. FDTD time steps satisfy the solver's Courant bound; convolution
+buffers and sample-rate conversions are checked for finite latency and no
+aliasing. Monte Carlo results include seed, effective samples, confidence
+interval, and a zero-safe relative error. A failed bound, missing acoustic
+material, invalid calibration, stale snapshot, or non-finite IR returns a
+typed failure (`ORCHA_OUT_OF_REGIME`, `ORCHA_NONCONVERGED`, or
+`ORCHA_INVALID_INPUT`) and no result is published.
+
+Reference tests run the same Atlas snapshot through CPU and GPU backends,
+with deterministic seeds and fixed channel ordering. GPU reductions may differ
+in the last bits, so acceptance uses physical tolerances and confidence
+intervals; deterministic impulse-response metadata and path classifications
+must still match. Adversarial fixtures include zero-distance source/listener,
+coincident and silent sources, grazing paths, disconnected rooms, zero-thickness
+and perfectly absorbing walls, extreme temperatures, NaN material tables,
+sample-rate changes, and truncated impulse responses.
+
+The shared [numerical robustness](../../research/numerical-robustness.md) and
+[cross-module validation](../../research/cross-module-validation.md)
+protocols define parity, uncertainty, and failure handling.

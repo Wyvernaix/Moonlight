@@ -26,3 +26,17 @@ Test current/previous-version readers and writers, ABI minor negotiation,
 migrations, lockfile resolution and deterministic catalog output. See
 [data formats](data-formats.md), [module system](module-system.md) and
 [ADR 0003](adr/0003-abi-and-plugin-loading.md).
+
+## Compatibility decision table
+
+| Change | Reader | Writer | Required action |
+| --- | --- | --- | --- |
+| Add optional field/capability | Old | New | Omit or default for old consumers |
+| Change required field semantics | Old | New | New schema/API major and migration |
+| Add ABI table suffix | Old | New | Guard with `struct_size` and minor negotiation |
+| Remove/deprecate capability | New | Old | Keep compatibility window or reject explicitly |
+| Change canonical/hash meaning | Any | Any | New schema/version; never reinterpret bytes |
+
+The precondition for claiming compatibility is passing the relevant golden,
+migration, and ABI fixtures. The postcondition is identical documented
+semantics, not merely successful parsing.

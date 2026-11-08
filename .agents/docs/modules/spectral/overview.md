@@ -137,3 +137,37 @@ transfer function, and color-space metadata; an RGB PNG without that context
 is not a physical measurement. Full-field outputs record boundary conditions,
 mesh, time step, residual, and energy balance. See the research workflow and
 validation protocol before adding a new backend.
+
+## Proof obligations and failure semantics
+
+Each observable has a dimensional check before evaluation: radiance declares
+its spectral measure, extinction is inverse metres, phase is dimensionless,
+and wavelength/frequency conversions use the serialized convention. Passive
+interfaces must satisfy `R + T + A = 1` (within uncertainty), BRDFs satisfy
+reciprocity and non-negative hemispherical reflectance, and volume transport
+does not create energy unless an emission term is present. Polarization tests
+preserve the Stokes physicality bound `S0 >= sqrt(S1^2 + S2^2 + S3^2)`.
+
+Refinement increases samples, spatial resolution, or temporal resolution until
+the observable's confidence interval and discretization estimate satisfy the
+manifest. FDTD uses a Courant-safe time step; iterative solvers report residual,
+conditioning, stagnation, and iteration limit. Uncertainty propagation keeps
+material, calibration, statistical, and numerical contributions separate and
+uses covariance or a conservative bound when independence is not justified.
+An out-of-regime, missing-data, non-finite, energy-balance, or non-converged
+case returns a typed failure (`SPC_UNSUPPORTED_REGIME`, `SPC_INVALID_DATA`,
+`SPC_NONCONVERGED`, or `SPC_INVARIANT`) unless the caller explicitly permits
+an approximation-with-warning.
+
+CPU and GPU reference scenes share canonical inputs, seeds, sample counts, and
+measurement definitions. Bitwise equality is required for deterministic
+fixtures; stochastic GPU paths use confidence intervals and physical
+tolerances, while reporting device, driver, precision, reduction mode, and
+fast-math settings. Adversarial coverage includes zero-width spectra, grazing
+incidence, total internal reflection, negative/complex-index edge cases,
+sub-wavelength geometry, denormal values, empty lights, saturated sensors,
+degenerate triangles, missing cache bricks, and extreme dynamic range.
+
+Apply the shared [numerical robustness](../../research/numerical-robustness.md)
+and [adversarial/reference scene suite](../../research/adversarial-reference-scenes.md)
+before accepting a backend as a reference implementation.

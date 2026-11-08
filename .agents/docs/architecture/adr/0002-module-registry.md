@@ -30,3 +30,11 @@ contracts. Maintaining a second YAML graph guarantees drift.
 
 Validation tests cover duplicate IDs, malformed manifests, missing required
 dependencies, cycles, deterministic export and optional providers.
+
+## Contract checks
+
+Discovery starts from a bounded repository root and produces either a complete
+catalog or a typed failure; partial catalogs are not valid inputs to build or
+startup. The catalog postcondition is stable ordering and a content hash over
+canonical manifests. Concurrent readers may consume a published catalog, but
+writers publish by atomic replacement. See [architecture conformance](../architecture-conformance.md).

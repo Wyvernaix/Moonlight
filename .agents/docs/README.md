@@ -57,6 +57,11 @@ requires code and tests in the same change set.
 | Reproduce a result | `development/build-and-test.md`, `research/README.md` |
 | Diagnose a failure | `development/troubleshooting.md`, `architecture/observability.md` |
 
+The shared standard for technical completeness, evidence, invariants, and
+resilience levels is [quality-model.md](quality-model.md). A page that cannot
+meet the proof obligations there must remain explicitly marked Draft or Design
+target.
+
 ## Technical writing requirements
 
 Algorithm documentation must state inputs, outputs, units, coordinate systems,

@@ -33,3 +33,12 @@ runtime. A single C++ ABI would not safely cover Rust and managed consumers.
 CI builds all language boundaries, runs ABI fixtures and rejects forbidden
 dependency edges. Revisit this decision only with a measured deployment or
 performance constraint.
+
+## Contract checks
+
+The precondition for a native/managed call is a negotiated ABI and generated
+binding version; the postcondition is explicit ownership transfer or a
+borrow whose lifetime is documented. Invalid ABI, exception, panic, or
+allocator states return a categorized error and cannot cross the boundary.
+The invariant is that runtime targets remain independent of Editor,
+Workbench, Python, and test-only targets. See [contract verification](../contract-verification.md).

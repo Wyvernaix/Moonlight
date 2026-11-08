@@ -33,3 +33,22 @@ dependents are cancelled unless they declare a fallback. Panics/exceptions are
 captured at job boundaries and reported to [observability](observability.md).
 Test ordering, cancellation, starvation, queue saturation, affinity,
 deterministic replay and audio underrun behavior under load.
+
+## Preconditions and postconditions
+
+Submission requires a declared queue, finite deadline (or an explicit
+long-lived class), valid dependency handles, and an owner that outlives the
+job. A successful completion publishes outputs exactly once; cancellation
+publishes no partial output. A job is terminal after `Succeeded`, `Failed`,
+`Cancelled`, or `TimedOut`; observers may read the result concurrently.
+
+## Concurrency invariants
+
+The dependency DAG is immutable after admission. Each job has one owner and
+one terminal transition, and cancellation races are resolved atomically.
+Queue depth is bounded; producers receive backpressure or a documented
+drop/coalesce result. Shutdown stops admission, cancels dependents, joins
+workers, and proves no callback references unloaded module state.
+
+See [fault injection and recovery](fault-injection-recovery.md) for queue,
+deadline, and worker-failure scenarios.

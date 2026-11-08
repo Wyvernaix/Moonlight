@@ -31,3 +31,11 @@ accuracy threshold was rejected because regimes and metrics differ.
 
 Golden scenes, deterministic repeated runs, convergence tests and documented
 error budgets are required. See [graph specification](../graph-system-specification.md).
+
+## Contract checks
+
+Reference comparisons require matching snapshot and asset hashes, compatible
+settings, and a declared validity regime. A successful comparison emits
+reproducible metrics; missing provenance or an invalid regime yields
+`NotComparable`, never a fabricated score. Runs are isolated so concurrent
+comparisons cannot mutate shared renderer state.

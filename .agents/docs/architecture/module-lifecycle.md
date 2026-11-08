@@ -45,3 +45,21 @@ quiesce, records diagnostics, and prevents dependent startup.
 Test success, each hook failure, dependency rollback, timeout, repeated stop,
 optional absence, and concurrent service lookup. See [observability](observability.md)
 for lifecycle events and [dependency rules](dependency-rules.md).
+
+## Preconditions and postconditions
+
+`load` requires an admitted, compatible manifest and no prior loaded instance;
+success owns the library and allocates no host-owned service handles. `start`
+requires all required services registered; success publishes readiness exactly
+once. `quiesce` requires `Started` and prevents new work; `stop` requires
+quiesced state and invalidates handles before unregister. `unload` requires no
+callbacks, jobs, or owned handles. A failed hook leaves the module unavailable
+and invokes only the rollback hooks permitted by the current state.
+
+## Concurrency rules
+
+Lifecycle hooks run on the lifecycle thread. Service lookup may be concurrent
+only after registration, and returned handles remain valid until quiesce
+begins. Unregister is the linearization point: lookups after it fail and all
+in-flight callbacks are joined before it returns. Jobs submitted by a module
+carry its cancellation token and must be drained or cancelled before unload.

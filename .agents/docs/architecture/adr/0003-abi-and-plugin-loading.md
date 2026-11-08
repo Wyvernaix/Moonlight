@@ -31,3 +31,10 @@ are not stable. Blindly accepting a symbol is rejected as unsafe.
 
 Test old/new fixtures, wrong sizes, unsupported platforms, tampered binaries,
 allocator errors, callback races and bounded unload.
+
+## Contract checks
+
+Admission is a state machine (`Unseen → Verified → Admitted → Started`) with
+`Rejected` terminal on any precondition failure. No plugin hook is callable
+before `Admitted`, and no handle remains valid after `Stopped`. Compatibility
+claims require the fixture matrix in [ABI compatibility testing](../abi-compatibility-testing.md).
