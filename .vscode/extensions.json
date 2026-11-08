@@ -1,0 +1,17 @@
+{
+  "recommendations": [
+    "ms-vscode.cpptools-extension-pack",
+    "ms-vscode.cmake-tools",
+    "rust-lang.rust-analyzer",
+    "ms-dotnettools.csdevkit",
+    "ms-dotnettools.csharp",
+    "ms-python.python",
+    "charliermarsh.ruff",
+    "tamasfe.even-better-toml",
+    "redhat.vscode-yaml",
+    "xaver.clang-format",
+    "editorconfig.editorconfig",
+    "streetsidesoftware.code-spell-checker",
+    "github.vscode-github-actions"
+  ]
+}

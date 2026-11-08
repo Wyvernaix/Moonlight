@@ -1,0 +1,51 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Moonlight: Build Complete (Debug)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/python/build.py",
+      "args": [
+        "--configuration",
+        "debug"
+      ],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Moonlight: Build Complete (Release)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/python/build.py",
+      "args": [
+        "--configuration",
+        "release"
+      ],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Moonlight: Native Core Tests",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${command:cmake.launchTargetPath}",
+      "cwd": "${command:cmake.launchTargetDirectory}",
+      "MIMode": "gdb",
+      "stopAtEntry": false,
+      "externalConsole": false,
+      "preLaunchTask": "Moonlight: Native Debug",
+      "linux": {
+        "MIMode": "gdb"
+      },
+      "osx": {
+        "MIMode": "lldb"
+      },
+      "windows": {
+        "type": "cppvsdbg"
+      }
+    }
+  ]
+}

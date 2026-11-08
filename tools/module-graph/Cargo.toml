@@ -1,0 +1,11 @@
+[package]
+name = "module-graph"
+version = "0.1.0"
+description = "Validate and export Moonlight module manifests"
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[[bin]]
+name = "module-graph"
+path = "src/main.rs"

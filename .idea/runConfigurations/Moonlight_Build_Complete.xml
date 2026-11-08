@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="false" folderName="Moonlight">
+    <module name="Moonlight" />
+    <option name="SCRIPT_NAME" value="$PROJECT_DIR$/python/build.py" />
+    <option name="PARAMETERS" value="--configuration debug" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    <option name="SHOW_COMMAND_LINE" value="false" />
+    <method v="2" />
+  </configuration>
+</component>

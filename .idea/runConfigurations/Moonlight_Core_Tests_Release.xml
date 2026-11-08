@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" type="CMakeRunConfiguration" factoryName="CMake Application" folderName="Moonlight">
+    <option name="CONFIG_NAME" value="release" />
+    <option name="TARGET_NAME" value="moonlight_core_tests" />
+    <option name="PROJECT_NAME" value="Moonlight" />
+    <method v="2">
+      <option name="com.jetbrains.cidr.execution.impl.CMakeBuildBeforeRunTask" enabled="true" />
+    </method>
+  </configuration>
+</component>

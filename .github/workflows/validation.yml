@@ -1,0 +1,47 @@
+name: Validation
+
+on:
+  workflow_call:
+  workflow_dispatch:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  module-graph:
+    name: Module graph
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python scripts/moonlight.py validate
+      - run: python scripts/moonlight.py export --out build/graph/module-catalog.json
+
+  python:
+    name: Python tooling
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m py_compile python/build.py scripts/moonlight.py scripts/moonlight/*.py
+      - run: python scripts/moonlight.py validate
+      - run: python scripts/moonlight.py export --out build/graph/module-catalog.json
+
+  workflow-files:
+    name: Workflow inventory
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Ensure only supported workflows exist
+        shell: bash
+        run: |
+          expected="build.yml pr.yml release.yml security.yml test.yml validation.yml"
+          actual="$(find .github/workflows -maxdepth 1 -type f -printf '%f\n' | sort | tr '\n' ' ')"
+          test "$actual" = "build.yml pr.yml release.yml security.yml test.yml validation.yml "

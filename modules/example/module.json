@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "id": "example",
+  "name": "Example Module",
+  "version": "0.1.0",
+  "description": "Small C++ module used to verify module discovery and builds.",
+  "languages": ["cpp"],
+  "dependencies": [],
+  "capabilities": ["example.greeting"],
+  "cmakeTarget": "moonlight_module_example"
+}

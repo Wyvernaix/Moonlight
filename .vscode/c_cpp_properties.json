@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "name": "Moonlight",
+      "compileCommands": "${workspaceFolder}/build/debug/compile_commands.json",
+      "cppStandard": "c++20",
+      "intelliSenseMode": "${default}",
+      "includePath": [
+        "${workspaceFolder}/src/native/**"
+      ]
+    }
+  ],
+  "version": 4
+}

@@ -13,6 +13,7 @@
       "binaryDir": "${sourceDir}/build/${presetName}",
       "cacheVariables": {
         "CMAKE_CXX_EXTENSIONS": "OFF",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
         "CMAKE_POSITION_INDEPENDENT_CODE": "ON",
         "MOONLIGHT_BUILD_TESTS": "ON",
         "MOONLIGHT_ENABLE_WARNINGS": "ON"
@@ -53,6 +54,13 @@
     {
       "name": "debug",
       "configurePreset": "debug",
+      "output": {
+        "outputOnFailure": true
+      }
+    },
+    {
+      "name": "release",
+      "configurePreset": "release",
       "output": {
         "outputOnFailure": true
       }

@@ -1,2 +1,0 @@
-# Modules -
-The Assets module

@@ -1,0 +1,90 @@
+{
+  "cmake.useCMakePresets": "always",
+  "cmake.configureOnOpen": true,
+  "cmake.buildDirectory": "${workspaceFolder}/build/${presetName}",
+  "cmake.generator": "Ninja",
+  "cmake.parallelJobs": 0,
+  "cmake.configureSettings": {
+    "CMAKE_CXX_EXTENSIONS": "OFF",
+    "CMAKE_POSITION_INDEPENDENT_CODE": "ON",
+    "MOONLIGHT_BUILD_TESTS": "ON",
+    "MOONLIGHT_ENABLE_WARNINGS": "ON"
+  },
+  "cmake.copyCompileCommands": "${workspaceFolder}/build/compile_commands.json",
+  "cmake.testEnvironment": {
+    "CTEST_OUTPUT_ON_FAILURE": "1"
+  },
+  "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+  "C_Cpp.default.cppStandard": "c++20",
+  "C_Cpp.default.compileCommands": "${workspaceFolder}/build/compile_commands.json",
+  "rust-analyzer.linkedProjects": [
+    "${workspaceFolder}/Cargo.toml"
+  ],
+  "rust-analyzer.check.command": "clippy",
+  "rust-analyzer.check.extraArgs": [
+    "--workspace",
+    "--all-targets",
+    "--",
+    "-D",
+    "warnings"
+  ],
+  "dotnet.defaultSolution": "${workspaceFolder}/Moonlight.sln",
+  "python.analysis.typeCheckingMode": "strict",
+  "python.analysis.autoImportCompletions": true,
+  "python.testing.pytestEnabled": true,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.organizeImports": "explicit"
+  },
+  "[cpp]": {
+    "editor.defaultFormatter": "xaver.clang-format",
+    "editor.formatOnSave": true
+  },
+  "[csharp]": {
+    "editor.defaultFormatter": "ms-dotnettools.csharp",
+    "editor.formatOnSave": true
+  },
+  "[rust]": {
+    "editor.defaultFormatter": "rust-lang.rust-analyzer",
+    "editor.formatOnSave": true
+  },
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.formatOnSave": true
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.vs": true,
+    "**/.idea": true,
+    "**/build": true,
+    "**/target": true,
+    "**/bin": true,
+    "**/obj": true,
+    "**/__pycache__": true
+  },
+  "search.exclude": {
+    "**/build": true,
+    "**/target": true,
+    "**/bin": true,
+    "**/obj": true,
+    "**/.venv": true
+  },
+  "files.watcherExclude": {
+    "**/build/**": true,
+    "**/target/**": true,
+    "**/bin/**": true,
+    "**/obj/**": true
+  },
+  "editor.rulers": [
+    100
+  ],
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true
+}

@@ -1,17 +1,18 @@
 ---
 Language: Cpp
 BasedOnStyle: LLVM
-Standard: c++23
+Standard: c++20
 IndentWidth: 4
+ContinuationIndentWidth: 4
 TabWidth: 4
 UseTab: Never
 ColumnLimit: 100
-BreakBeforeBraces: Attach
+BreakBeforeBraces: Allman
 AllowShortFunctionsOnASingleLine: Empty
 AllowShortIfStatementsOnASingleLine: Never
+NamespaceIndentation: None
 PointerAlignment: Left
-ReferenceAlignment: Left
+DerivePointerAlignment: false
 SortIncludes: CaseSensitive
 IncludeBlocks: Regroup
-DerivePointerAlignment: false
 ...

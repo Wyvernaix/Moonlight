@@ -1,43 +1,159 @@
-# Build output
+# ---------------------------------------------------------------------------
+# Build output and generated artifacts
+# ---------------------------------------------------------------------------
 /build/
-/cmake-build-*/
 /out/
+/dist/
+/artifacts/
+/cmake-build-*/
+/target/
 /bin/
 /obj/
-/target/
+**/build/
+**/out/
+**/target/
+**/bin/
+**/obj/
 
-# CMake and compiler artifacts
+# CMake and native build systems
 CMakeCache.txt
 CMakeFiles/
 cmake_install.cmake
 compile_commands.json
 CTestTestfile.cmake
+CTestCostData.txt
 Makefile
+install_manifest.txt
+*.cmake.user
 *.ninja
 *.ninja_deps
 *.ninja_log
+*.vcxproj.user
+/CMakeUserPresets.json
 
-# IDE and editor state
-.idea/workspace.xml
-.idea/**/workspace.xml
-.vs/
-.vscode/
-*.user
-*.suo
-*.swp
-*~
-
-# Coverage, profiling, and analysis
-coverage/
+# Native compiler, linker, debugger, and profiler output
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.so.*
+*.dylib
+*.dll
+*.exe
+*.pdb
+*.ilk
+*.dSYM/
+*.gch
+*.pch
 *.gcda
 *.gcno
+*.prof
 *.profraw
 *.profdata
+*.coverage
+*.core
+core
+coverage/
 *.sarif
 
-# OS metadata and local environment
-.DS_Store
-Thumbs.db
+# Rust and Cargo
+**/.cargo/
+target/
+*.rs.bk
+
+# .NET and NuGet
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+packages/
+.nuget/
+TestResults/
+**/BenchmarkDotNet.Artifacts/
+
+# Python tooling
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.pytest_mypy_cache/
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
+.tox/
+.nox/
+.coverage
+htmlcov/
+.venv/
+venv/
+env/
+ENV/
+pip-wheel-metadata/
+*.egg-info/
+*.egg
+Pipfile.lock
+poetry.lock
+
+# Generated graphs, catalogs, schemas, shader intermediates, and caches
+/generated/
+**/generated/*
+!docs/generated/
+!docs/generated/.gitkeep
+shader-cache/
+shader-intermediates/
+*.spv
+*.dxil
+*.metallib
+*.cache
+.cache/
+.local/
+
+# IDE and editor state
+.vs/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/c_cpp_properties.json
+.idea/workspace.xml
+.idea/**/workspace.xml
+.idea/**/shelf/
+*.swp
+*.swo
+*~
+*.orig
+
+# CI, packaging, and local logs
+*.log
+*.tmp
+*.temp
+/release/
+/packages/
+
+# Local configuration and credentials
 .env
 .env.*
 !.env.example
+*.local
+*.secret
+*.secrets
+*.key
+*.pem
+
+# Operating-system metadata
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+Thumbs.db
+Desktop.ini
+
+# Archives created for local transfer
+*.7z
+*.gz
+*.rar
+*.tar
+*.zip
