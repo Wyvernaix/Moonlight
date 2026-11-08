@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "id": "flywheel",
+  "name": "Flywheel Animation",
+  "version": "0.1.0",
+  "description": "Buildable foundation for animation graphs, poses, and runtime evaluation.",
+  "languages": ["cpp"],
+  "dependencies": [],
+  "capabilities": ["animation.pose.v1", "animation.graph.v1"],
+  "cmakeTarget": "moonlight_module_flywheel",
+  "platforms": ["linux", "macos", "windows", "headless"]
+}

@@ -1,0 +1,7 @@
+schema_version = 1
+engine_name = "Moonlight"
+data_root = "data"
+module_root = "modules"
+headless = true
+worker_threads = 0
+log_level = "info"

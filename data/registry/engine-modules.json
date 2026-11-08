@@ -1,0 +1,6 @@
+{
+  "schemaVersion": 1,
+  "source": "modules/*/module.json",
+  "generated": false,
+  "catalog": "build/graph/module-catalog.json"
+}

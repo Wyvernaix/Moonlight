@@ -1,0 +1,23 @@
+include_guard(GLOBAL)
+
+function(moonlight_apply_sanitizers target)
+    if(NOT MOONLIGHT_ENABLE_SANITIZERS)
+        return()
+    endif()
+
+    get_target_property(target_type "${target}" TYPE)
+    if(target_type STREQUAL "INTERFACE_LIBRARY")
+        set(scope INTERFACE)
+    else()
+        set(scope PRIVATE)
+    endif()
+
+    if(MSVC)
+        message(STATUS "Native sanitizers are not enabled for MSVC in this preset")
+    elseif(CMAKE_CXX_COMPILER_ID MATCHES "Clang|GNU")
+        target_compile_options(${target} ${scope} -fsanitize=address,undefined -fno-omit-frame-pointer)
+        if(NOT target_type STREQUAL "INTERFACE_LIBRARY")
+            target_link_options(${target} PRIVATE -fsanitize=address,undefined)
+        endif()
+    endif()
+endfunction()

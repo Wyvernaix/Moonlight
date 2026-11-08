@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "id": "atlas",
+  "name": "Atlas Scene and ECS",
+  "version": "0.1.0",
+  "description": "Buildable foundation for scene identity, entities, components, and snapshots.",
+  "languages": ["cpp"],
+  "dependencies": [],
+  "capabilities": ["scene.graph.v1", "scene.ecs.v1"],
+  "cmakeTarget": "moonlight_module_atlas",
+  "platforms": ["linux", "macos", "windows", "headless"]
+}

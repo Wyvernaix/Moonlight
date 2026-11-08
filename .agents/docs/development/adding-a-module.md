@@ -20,7 +20,13 @@ cmake --preset debug && cmake --build --preset debug
 ctest --preset debug --output-on-failure
 ```
 
-The validator loads `schemas/module-manifest.schema.json`, checks manifests, then checks the dependency graph. A failure identifies either malformed JSON/schema fields, an unknown dependency, or a cycle; fix that before investigating compiler output. If a module has no tests, document why and add contract tests at the nearest boundary.
+The target validator loads `data/schemas/module/module-manifest.schema.json`,
+checks manifests, then checks the dependency graph. The current milestone may
+use the compatibility path `schemas/module-manifest.schema.json` during the
+data-tree migration. A failure identifies malformed JSON/schema fields, an
+unknown dependency, or a cycle; fix that before investigating compiler output.
+If a module has no tests, document why and add contract tests at the nearest
+boundary.
 
 ## API and ownership
 

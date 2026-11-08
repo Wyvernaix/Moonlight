@@ -12,7 +12,7 @@ rejects duplicate IDs and required cycles, and exports
 
 ```json
 {
-  "$schema": "../../schemas/module-manifest.schema.json",
+  "$schema": "../../data/schemas/module/module-manifest.schema.json",
   "id": "moonlight.example",
   "version": "0.1.0",
   "language": "cpp",
@@ -25,7 +25,9 @@ rejects duplicate IDs and required cycles, and exports
 IDs, versions and dependency arrays are deterministic and sorted in generated
 catalogs. The catalog records source path, manifest hash, target names,
 capabilities and validation diagnostics; consumers must not infer fields from
-directory names.
+directory names. The current milestone may retain a compatibility copy at
+`schemas/module-manifest.schema.json` during migration, but the validator must
+resolve one canonical schema ID and reject conflicting copies.
 
 ## Lifecycle
 

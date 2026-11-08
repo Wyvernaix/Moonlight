@@ -2,7 +2,7 @@
 
 This page is the reproducible first checkout procedure for Moonlight. Run commands from the repository root; do not put generated files in source directories.
 
-## Required toolchain
+## Required host toolchain
 
 | Tool | Required version/role |
 |---|---|
@@ -21,7 +21,43 @@ python --version; cmake --version; ninja --version
 cargo --version; rustc --version; dotnet --version
 ```
 
-On Windows use `py --version` if `python` is not registered, and run commands in Developer PowerShell (or Git Bash for the shell examples). On macOS install Xcode Command Line Tools (`xcode-select --install`) and use Homebrew CMake/Ninja if the system versions are too old. On Linux install the distribution C++ build-essential package, CMake, Ninja, Python 3.11, Rustup, and .NET 10; do not mix an old system `dotnet` with the CI SDK.
+The host compiler, Git, Python, CMake, Ninja, and the platform's native build
+utilities must already be installed;
+the project cannot safely install a compiler or OS-level SDK without
+administrator privileges. On Windows use Developer PowerShell, on macOS run
+`xcode-select --install`, and on Linux install the distribution C++ toolchain.
+The repository bootstrap installs the project-level CMake dependencies after
+these host tools exist.
+
+## Project dependency bootstrap
+
+From the repository root, run:
+
+```sh
+python python/bootstrap.py
+```
+
+This downloads the pinned vcpkg release into `third_party/vcpkg`, bootstraps
+vcpkg locally, and installs the manifest dependencies for the detected
+Windows, macOS, or Linux architecture. The Workbench command performs this
+automatically:
+
+```sh
+python python/build.py --workbench
+```
+
+The Vulkan runtime/driver remains an OS or GPU-vendor responsibility and is
+not installed by vcpkg. On Linux and macOS, vcpkg may also require the native
+autotools utilities (`autoconf`, `automake`, `libtool`, and `pkg-config`) for
+transitive packages. Bootstrap recognizes `pacman`, `apt-get`, `dnf`,
+`zypper`, `apk`, and Homebrew, and reports the appropriate install command.
+Linux users may explicitly allow package installation with:
+
+```sh
+python python/bootstrap.py --install-host-tools
+```
+
+The default bootstrap never invokes a system package manager.
 
 ## Python environment
 

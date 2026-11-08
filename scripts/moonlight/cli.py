@@ -21,7 +21,11 @@ def main() -> int:
     args = parser.parse_args()
     modules_root = args.root / "modules"
     modules = discover_modules(modules_root)
-    schema_path = args.root / "schemas" / "module-manifest.schema.json"
+    schema_candidates = (
+        args.root / "data" / "schemas" / "module" / "module-manifest.schema.json",
+        args.root / "schemas" / "module-manifest.schema.json",
+    )
+    schema_path = next((path for path in schema_candidates if path.exists()), schema_candidates[0])
     try:
         schema = json.loads(schema_path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as error:

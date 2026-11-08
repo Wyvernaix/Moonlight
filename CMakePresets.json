@@ -36,6 +36,48 @@
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release"
       }
+    },
+    {
+      "name": "workbench",
+      "inherits": "debug",
+      "displayName": "Workbench Debug",
+      "description": "Debug build with the SDL3/Vulkan Dear ImGui Workbench host",
+      "cacheVariables": {
+        "MOONLIGHT_BUILD_WORKBENCH": "ON",
+        "MOONLIGHT_ENABLE_VULKAN": "ON"
+      }
+    },
+    {
+      "name": "workbench-vcpkg",
+      "inherits": "debug-vcpkg",
+      "displayName": "Workbench Debug with portable dependencies",
+      "description": "Vulkan Workbench using the repository-local vcpkg manifest",
+      "cacheVariables": {
+        "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/third_party/vcpkg/scripts/buildsystems/vcpkg.cmake",
+        "MOONLIGHT_BUILD_WORKBENCH": "ON",
+        "MOONLIGHT_ENABLE_VULKAN": "ON",
+        "VCPKG_MANIFEST_FEATURES": "shader-toolchain"
+      }
+    },
+    {
+      "name": "debug-vcpkg",
+      "inherits": "debug",
+      "displayName": "Debug with portable dependencies",
+      "description": "Debug build using the repository vcpkg manifest",
+      "cacheVariables": {
+        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+        "MOONLIGHT_USE_VCPKG_DEPENDENCIES": "ON"
+      }
+    },
+    {
+      "name": "release-vcpkg",
+      "inherits": "release",
+      "displayName": "Release with portable dependencies",
+      "description": "Release build using the repository vcpkg manifest",
+      "cacheVariables": {
+        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+        "MOONLIGHT_USE_VCPKG_DEPENDENCIES": "ON"
+      }
     }
   ],
   "buildPresets": [
@@ -47,6 +89,26 @@
     {
       "name": "release",
       "configurePreset": "release",
+      "jobs": 0
+    },
+    {
+      "name": "workbench",
+      "configurePreset": "workbench",
+      "jobs": 0
+    },
+    {
+      "name": "workbench-vcpkg",
+      "configurePreset": "workbench-vcpkg",
+      "jobs": 0
+    },
+    {
+      "name": "debug-vcpkg",
+      "configurePreset": "debug-vcpkg",
+      "jobs": 0
+    },
+    {
+      "name": "release-vcpkg",
+      "configurePreset": "release-vcpkg",
       "jobs": 0
     }
   ],
@@ -61,6 +123,20 @@
     {
       "name": "release",
       "configurePreset": "release",
+      "output": {
+        "outputOnFailure": true
+      }
+    },
+    {
+      "name": "debug-vcpkg",
+      "configurePreset": "debug-vcpkg",
+      "output": {
+        "outputOnFailure": true
+      }
+    },
+    {
+      "name": "release-vcpkg",
+      "configurePreset": "release-vcpkg",
       "output": {
         "outputOnFailure": true
       }

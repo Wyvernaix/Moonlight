@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "id": "orcha",
+  "name": "Orcha Acoustic Simulation and Audio",
+  "version": "0.1.0",
+  "description": "Buildable foundation for acoustic propagation, spatialization, and DSP.",
+  "languages": ["cpp"],
+  "dependencies": [],
+  "capabilities": ["audio.dsp.v1", "audio.acoustics.v1"],
+  "cmakeTarget": "moonlight_module_orcha",
+  "platforms": ["linux", "macos", "windows", "headless"]
+}

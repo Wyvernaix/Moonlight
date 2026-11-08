@@ -9,7 +9,8 @@
 | `modules/` | Registered C++/Rust engine modules |
 | `scripts/` | Project and module command-line tooling |
 | `python/` | Build, validation and repository automation |
-| `schemas/` | Versioned data and module contracts |
+| `data/schemas/` | Canonical versioned data and module contracts in the target architecture |
+| `data/config/` | Shared engine, platform, rendering, audio, and CI profiles in the target architecture |
 | `cmake/` | Shared native build helpers |
 | `tests/` | Cross-language and contract tests |
 | `.agents/docs/` | Agent-maintained normalized architecture and module documentation |
@@ -27,3 +28,10 @@ Generated files under `build/` are disposable. Architecture source is limited
 to `.agents/docs/architecture`; links should be relative and stable. See
 [overview](overview.md), [assets and data](assets-and-data.md), and
 [versioning](versioning.md).
+
+The current milestone still contains `schemas/module-manifest.schema.json`;
+that path is a migration-compatible implementation location. New shared
+schemas and configuration must use `data/schemas/` and `data/config/` as
+defined in `moonlight-monorepo-architecture.md`. The module validator must
+support the transition without accepting two conflicting copies of the same
+schema ID.

@@ -1,0 +1,25 @@
+{
+  "name": "moonlight",
+  "version-string": "0.1.0",
+  "description": "Cross-platform modular rendering and simulation engine",
+  "dependencies": [
+    "catch2",
+    "fmt",
+    "glm",
+    "imgui",
+    "nlohmann-json",
+    "sdl3",
+    "spdlog",
+    "vulkan",
+    "vulkan-headers",
+    "yaml-cpp"
+  ],
+  "features": {
+    "shader-toolchain": {
+      "description": "Offline shader compilation and SPIR-V reflection",
+      "dependencies": [
+        "shaderc"
+      ]
+    }
+  }
+}

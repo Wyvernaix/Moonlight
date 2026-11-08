@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "id": "spectral",
+  "name": "Spectral Rendering and Optical Simulation",
+  "version": "0.1.0",
+  "description": "Buildable foundation for spectral transport, materials, and optical solvers.",
+  "languages": ["cpp"],
+  "dependencies": [],
+  "capabilities": ["rendering.spectral.v1", "optics.materials.v1"],
+  "cmakeTarget": "moonlight_module_spectral",
+  "platforms": ["linux", "macos", "windows", "headless"]
+}

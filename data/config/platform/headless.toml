@@ -1,0 +1,5 @@
+schema_version = 1
+window_system = "none"
+audio_device = "null"
+graphics_backend = "reference"
+allow_gpu = false

@@ -5,6 +5,8 @@
 /out/
 /dist/
 /artifacts/
+/third_party/vcpkg/
+/vcpkg_installed/
 /cmake-build-*/
 /target/
 /bin/
@@ -53,7 +55,7 @@ install_manifest.txt
 *.profdata
 *.coverage
 *.core
-core
+/core
 coverage/
 *.sarif
 
@@ -109,7 +111,7 @@ shader-intermediates/
 .cache/
 .local/
 
-# IDE and editor state
+# IDE and workbench state
 .vs/
 .vscode/*
 !.vscode/settings.json

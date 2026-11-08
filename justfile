@@ -17,3 +17,12 @@ managed:
 
 validate:
     python python/build.py
+
+workbench:
+    python python/build.py --workbench --skip native
+
+bootstrap:
+    python python/bootstrap.py
+
+plan:
+    python python/build.py --dry-run
